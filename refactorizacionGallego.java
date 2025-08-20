@@ -1,32 +1,47 @@
+class ErrorValidations {
+	public static final String NAME_NULL_OR_EMPTY = "Error: nombre vacío";
+    public static final String NAME_SHORT = "Error: nombre muy corto";
+    
+    public static final String EMAIL_NULL_OR_A = "Error: email inválido";
+    public static final String EMAIL_WITHOUT_DOT = "Error: email sin dominio";
+    
+    public static final String PASSWORD_NULL_OR_SHORT = "Error: password débil";
+    public static final String PASSWORD_WITHOUT_NUMBERS = "password sin números";
+}
+
+
 class NameValidator {
+	private ErrorValidations errorValidations;
     public void validateName(String name) {
         if(name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Error: nombre vacío");
+            throw new IllegalArgumentException(ErrorValidations.NAME_NULL_OR_EMPTY);
         }
         if(name.length() < 2) {
-            throw new IllegalArgumentException("Error: nombre muy corto");
+            throw new IllegalArgumentException(ErrorValidations.NAME_SHORT);
         }
     }
 }
 
 class EmailValidator {
+	private ErrorValidations errorValidations;
     public void validateEmail(String email) {
         if(email == null || !email.contains("@")) {
-            throw new IllegalArgumentException("Error: email inválido");
+            throw new IllegalArgumentException(errorValidations.EMAIL_NULL_OR_A);
         }
         if(!email.contains(".")) {
-            throw new IllegalArgumentException("Error: email sin dominio");
+            throw new IllegalArgumentException(errorValidations.EMAIL_WITHOUT_DOT);
         }
     }
 }
 
 class PasswordValidator {
+	private ErrorValidations errorValidations;
     public void validatePassword(String password) {
         if(password == null || password.length() < 8) {
-            throw new IllegalArgumentException("Error: password débil");
+            throw new IllegalArgumentException(errorValidations.PASSWORD_NULL_OR_SHORT);
         }
         if(!password.matches(".*[0-9].*")) {
-            throw new IllegalArgumentException("Error: password sin números");
+            throw new IllegalArgumentException(errorValidations.PASSWORD_WITHOUT_NUMBERS);
         }
             
     }
@@ -82,6 +97,6 @@ public class Main {
     
         UserManager userManager = new UserManager(validateInputs);
         
-        userManager.createUser("Juan", "Gallegoj92@gmail.com", "dasd3dasdas");
+        userManager.createUser("Juan", "Gallegoj92@gmail.com", "egdfgdf34gergdfg");
     }
 }
